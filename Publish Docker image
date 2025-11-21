@@ -1,0 +1,2 @@
+docker build -t ghcr.io/gitdigital-products/api-gateway:v1.0.0-rc1 .
+docker push ghcr.io/gitdigital-products/api-gateway:v1.0.0-rc1
