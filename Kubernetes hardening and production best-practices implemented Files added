@@ -1,0 +1,6 @@
+/k8s/pod-security-policies.yaml         # Example PSP (if cluster supports) and alternative PodSecurity admission annotations
+/k8s/resource-requests-limits.yaml     # Example Deployment with requests/limits
+/k8s/hpa.yaml                          # HorizontalPodAutoscaler example
+/k8s/secret-rotation-cronjob.yaml      # CronJob example to rotate secrets (integrates with KMS)
+/helm/blockchain-gateway/templates/poddisruptionbudget.yaml
+/helm/blockchain-gateway/templates/hpa.yaml
