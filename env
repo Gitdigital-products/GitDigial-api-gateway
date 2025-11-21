@@ -1,0 +1,7 @@
+PORT=3000
+NODE_ENV=development
+JWT_SECRET=replace_this_with_secure_random
+API_KEY_DB_CONN=sqlite://:memory:
+UPSTREAM_RPC_URL=https://rpc.example.chain
+RATE_LIMIT_POINTS=100
+RATE_LIMIT_DURATION=60
