@@ -1,0 +1,5 @@
+EVM_RPC_URL=https://mainnet.infura.io/v3/YOUR_KEY
+EVM_GAS_MULTIPLIER=1.15
+EVM_MAX_GAS_LIMIT=1200000
+EVM_SIGNER_TYPE=local|kms
+EVM_LOCAL_PRIVATE_KEY=... (only for local dev)
