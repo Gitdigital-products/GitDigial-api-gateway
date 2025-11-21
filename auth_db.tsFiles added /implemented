@@ -1,0 +1,7 @@
+/src/db/index.ts                      # Postgres connection via pg.Pool + helper utilities
+/src/db/migrations/002_api_keys.sql   # full migration to create api_keys table, indexes, and pgcrypto usage
+/src/plugins/auth_db.ts               # Complete auth plugin: checks Redis cache, Postgres, scope validation
+/src/scripts/create_key.ts            # Now produces hashed key, stores row, prints raw key once
+/src/scripts/migrate_runner.ts        # Programmatic migration runner (runs all SQL files in migrations dir)
+/test/auth_db.test.ts                 # Vitest tests for auth plugin (key lookup, cache, expiry, scopes)
+/.github/workflows/ci.yml             # CI updated to run migration runner before tests
