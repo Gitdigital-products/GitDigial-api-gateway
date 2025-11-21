@@ -1,0 +1,3 @@
+/test/integration/kms/localstack-kms.test.ts          # Integration test that starts LocalStack and uses KMS
+/.github/workflows/ci-localstack-kms.yml              # CI workflow to run LocalStack-based tests
+/test/__fixtures__/localstack-setup.sh                # helper script to create KMS key in LocalStack
