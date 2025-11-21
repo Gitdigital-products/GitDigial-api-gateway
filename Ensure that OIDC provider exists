@@ -1,0 +1,3 @@
+# get OIDC provider URL
+OIDC_PROVIDER=$(aws eks describe-cluster --name CLUSTER_NAME --region AWS_REGION --query "cluster.identity.oidc.issuer" --output text)
+echo $OIDC_PROVIDER
