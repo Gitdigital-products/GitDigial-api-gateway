@@ -1,0 +1,21 @@
+cat > iam-policy-kms.json <<'EOF'
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowKmsSign",
+      "Effect": "Allow",
+      "Action": [
+        "kms:Sign",
+        "kms:GetPublicKey",
+        "kms:DescribeKey"
+      ],
+      "Resource": "KMS_KEY_ARN"
+    }
+  ]
+}
+EOF
+
+aws iam create-policy --policy-name GatewayKmsSignPolicy --policy-document file://iam-policy-kms.json
+POLICY_ARN=$(aws iam list-policies --query "Policies[?PolicyName=='GatewayKmsSignPolicy'].Arn" --output text)
+echo $POLICY_ARN
