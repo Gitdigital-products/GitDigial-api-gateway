@@ -1,0 +1,6 @@
+/infra/eks/irsa-service-account.yaml            # ServiceAccount with IRSA annotation (template)
+/infra/eks/iam-policy-kms.json                   # IAM policy for KMS Sign/GetPublicKey
+/infra/eks/roles.trust-policy.json               # Trust policy for the IAM role (OIDC provider)
+/infra/eks/README.md                             # Step-by-step IRSA setup commands for EKS
+/infra/gke/README.md                             # Notes for GKE (Workload Identity) mapping
+/infra/aks/README.md                             # Notes for AKS (AAD Pod Identity) mapping
