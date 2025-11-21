@@ -1,0 +1,1 @@
+curl -sS -H "x-api-key: YOUR_KEY" https://api.example.com/health/
