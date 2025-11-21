@@ -1,0 +1,2 @@
+helm package charts/api-gateway
+helm push api-gateway-1.0.0-rc1.tgz oci://ghcr.io/gitdigital-products/charts
