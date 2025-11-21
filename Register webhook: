@@ -1,0 +1,4 @@
+curl -X POST -sS https://api.example.com/webhooks/register \
+  -H "x-api-key: YOUR_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"url":"https://hooks.example.com/gateway","events":["tx:confirmed"],"secret":"s3cr3t"}'
