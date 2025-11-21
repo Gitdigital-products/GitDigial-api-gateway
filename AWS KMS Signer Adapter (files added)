@@ -1,0 +1,3 @@
+/src/adapters/evm/kms/aws-kms-signer.ts         # AWS KMS signer implementation using aws-sdk v3
+/src/adapters/evm/kms/README.md                 # How to configure IAM & usage
+/src/config/kms-policy-example.json             # IAM policy example for KMS Sign and GetPublicKey
