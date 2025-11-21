@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "blockchain-gateway.fullname" . }}-migrate
+  labels:
+    app.kubernetes.io/name: {{ include "blockchain-gateway.name" . }}
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-weight": "0"
+spec:
+  template:
+    spec:
+      serviceAccountName: {{ .Values.serviceAccount.name | default (include "blockchain-gateway.serviceAccountName" .) }}
+      restartPolicy: OnFailure
+      containers:
+        - name: migrate
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          command: ["node", "/app/dist/scripts/migrate_runner.js"]
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secretName }}
+                  key: DATABASE_URL
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
