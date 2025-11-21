@@ -1,0 +1,39 @@
+openapi: 3.0.3
+info:
+  title: Blockchain API Gateway
+  version: '1.0.0'
+  description: API Gateway exposing simplified endpoints for blockchain interactions.
+servers:
+  - url: https://api.example.com
+paths:
+  /health:
+    get:
+      summary: Health check
+      responses:
+        '200':
+          description: OK
+  /rpc/proxy:
+    post:
+      summary: Proxy JSON-RPC to upstream blockchain node (validated)
+      security:
+        - ApiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                method:
+                  type: string
+                params:
+                  type: array
+      responses:
+        '200':
+          description: RPC result
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
