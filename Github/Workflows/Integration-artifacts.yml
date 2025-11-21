@@ -1,0 +1,29 @@
+name: Integration Artifacts
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      localstack:
+        image: localstack/localstack
+        ports:
+          - 4566:4566
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install deps
+        run: npm install
+
+      - name: Run LocalStack tests
+        run: npm run test:localstack
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: integration-artifacts
+          path: |
+            test-output/kms/*.log
+            test-output/tx/*.json
+            test-output/metrics/*.txt
