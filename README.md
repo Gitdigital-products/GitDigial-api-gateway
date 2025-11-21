@@ -1,16 +1,22 @@
-# api-gateway
-api-gateway FastAPI-based gateway for Gitdigital microservices.
-# API Gateway
+# Blockchain API Gateway
 
-The secure entry point for the **Gitdigital Products** ecosystem.  
-Routes external requests to internal services and manages traffic.
+A secure, documented API gateway that exposes a developer-friendly HTTP API for interacting with blockchain networks (RPC proxying, read-only endpoints, transaction submission helpers, analytics hooks, and webhook forwarding). Built with Fastify + TypeScript and designed for production use.
 
-## 🚀 Features
-- Built with **Axum** (Rust web framework).
-- Health check endpoint (`/health`).
-- Example routes for microservices.
-- Ready to extend with auth, rate limiting, and TLS.
+## Features
 
-## 🛠️ Setup
+- JWT & API key authentication
+- Rate limiting & per-key quotas
+- Input validation & JSON Schema-based request validation
+- Signature verification for sensitive operations
+- OpenAPI (Swagger) spec included
+- Logging & structured audit trails
+- Docker + docker-compose for local dev
+- Example client & tests
+
+## Quickstart (development)
+
+1. Copy `.env.example` to `.env` and set values.
+2. Install dependencies:
+
 ```bash
-cargo run
+npm install
