@@ -1,0 +1,5 @@
+/src/adapters/evm/evm-adapter.ts         # EVM submission adapter using ethers.js
+/src/adapters/evm/nonce-manager.ts       # Nonce management (per-account optimistic + fallback via chain query)
+/src/adapters/evm/signer.ts              # Signer abstraction (local PK, KMS, or external signer)
+/src/services/tx-submit-evm.service.ts   # Wire adapter into tx submission flow
+/test/evm-adapter.test.ts                # Unit tests (nonce, submission path, retry logic)
