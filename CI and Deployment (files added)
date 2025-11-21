@@ -1,0 +1,9 @@
+/.github/workflows/ci.yml             # Run lint, tests, migrations, build
+/.github/workflows/migrate.yml        # Optional separate migration workflow
+/k8s/deployment.yaml                  # Kubernetes Deployment + Service
+/k8s/secret-example.yaml              # K8s secrets (example)
+/helm/blockchain-gateway/Chart.yaml   # Minimal Helm chart
+/helm/blockchain-gateway/values.yaml  # Values schema
+/helm/blockchain-gateway/templates/deployment.yaml
+/helm/blockchain-gateway/templates/service.yaml
+/helm/blockchain-gateway/templates/secret.yaml
