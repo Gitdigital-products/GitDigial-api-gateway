@@ -1,0 +1,2 @@
+docker build -t blockchain-api-gateway .
+docker run --env-file .env -p 3000:3000 blockchain-api-gateway
