@@ -1,0 +1,11 @@
+rules:
+  custom:
+    - seriesQuery: 'queue_depth_metric{job="api-gateway"}'
+      resources:
+        overrides:
+          namespace: {resource: "namespace"}
+          pod: {resource: "pod"}
+      name:
+        matches: "^queue_depth_metric_.*$"
+        as: "worker_queue_depth"
+      metricsQuery: sum(queue_depth_metric)
