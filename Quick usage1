@@ -1,0 +1,6 @@
+import { GatewayClient } from "@yourorg/blockchain-gateway-sdk";
+
+const client = new GatewayClient("https://api.example.com", process.env.GW_API_KEY);
+await client.health();
+const rpc = await client.rpcProxy("eth_blockNumber");
+console.log(rpc);
