@@ -1,0 +1,20 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: gateway-ingress
+  namespace: gateway-prod
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`api.example.com`)
+      kind: Rule
+      services:
+        - name: gateway
+          port: 3000
+  tls:
+    certResolver: letsencrypt-prod
+    domains:
+      - main: api.example.com
+        sans:
+          - "*.api.example.com"
