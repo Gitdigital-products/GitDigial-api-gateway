@@ -1,0 +1,6 @@
+/src/worker/tx-worker.ts             # Worker that consumes queue, forwards txs, handles retries
+/src/queue/redisStream.ts            # Redis Streams queue helper (enqueue, consume, ack, DLQ)
+/src/queue/postgres_job_table.ts     # Alternative Postgres job table helper (enqueue, claim, finish)
+/src/services/tx-submit.service.ts   # Service layer that validates, deduplicates, enqueues txs
+/src/controllers/tx-controller.ts    # Controller wiring for POST /tx/submit (enqueues and returns job id)
+/src/workers/README.md               # How worker works, backoff policy, DLQ behavior
