@@ -1,0 +1,5 @@
+/src/db/index.ts                # DB connection (pg)
+/src/db/migrations/001_init.sql # SQL migration to create api_keys table
+/src/plugins/auth_db.ts         # Auth plugin wired to Postgres + Redis cache
+/src/scripts/create_key.ts      # Helper script to generate and insert API keys
+/.github/workflows/migrate.yml  # workflow job to run migrations during CI
