@@ -1,0 +1,1 @@
+helm install gateway ./helm/blockchain-gateway -f helm-values-prod.yaml
