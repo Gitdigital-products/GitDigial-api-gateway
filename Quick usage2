@@ -1,0 +1,35 @@
+> Publish tip: run `npm publish --access public` after building. For scoped packages (`@yourorg/...`) set up your npm org and permissions.
+
+---
+
+# Production migration Job (Kubernetes + Helm hook)
+
+File: `k8s/migrate-job.yaml` (standalone)
+```yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: gateway-db-migrate
+  namespace: gateway-prod
+spec:
+  backoffLimit: 3
+  template:
+    spec:
+      serviceAccountName: gateway-sa
+      restartPolicy: OnFailure
+      containers:
+        - name: migrate
+          image: ghcr.io/yourorg/blockchain-api-gateway:{{ .Chart.AppVersion | default "latest" }}
+          imagePullPolicy: IfNotPresent
+          command: ["node", "/app/dist/scripts/migrate_runner.js"]
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: gateway-secrets
+                  key: DATABASE_URL
+            - name: MIGRATION_DIR
+              value: "/app/src/db/migrations"
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
