@@ -1,0 +1,1 @@
+node dist/scripts/create_key.js --owner="dev" --scopes="default,tx:submit"
