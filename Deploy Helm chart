@@ -1,0 +1,1 @@
+helm upgrade --install gateway ./helm/blockchain-gateway -n NAMESPACE -f helm/blockchain-gateway/values.prod.yaml
