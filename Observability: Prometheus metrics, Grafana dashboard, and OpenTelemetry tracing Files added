@@ -1,0 +1,5 @@
+/src/telemetry/prometheus.ts            # Prometheus counters/gauges + endpoint integration
+/src/telemetry/opentelemetry.ts         # OpenTelemetry setup (tracing + resource attributes)
+/grafana/dashboard/blockchain-gateway.json  # Example Grafana dashboard JSON (requests, tx queue, worker metrics)
+/k8s/prometheus-service-monitor.yaml    # ServiceMonitor example for Prometheus Operator
+/helm/blockchain-gateway/templates/metrics-service.yaml # Helm template to expose metrics
