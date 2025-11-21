@@ -1,0 +1,3 @@
+/k8s/hpa-queue.yaml                          # HPA resource that uses custom metric for queue depth
+/prometheus/adapter/custom-metrics-config.yaml  # Prometheus Adapter config example mapping PromQL -> custom metric
+/prometheus/rules/queue-metrics.yaml         # Prometheus recording rule for worker_queue_depth
