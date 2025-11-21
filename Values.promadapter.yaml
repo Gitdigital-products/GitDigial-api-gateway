@@ -1,0 +1,12 @@
+prometheusAdapter:
+  enabled: true
+  rules:
+    - seriesQuery: 'worker_queue_depth{namespace="{{ .Release.Namespace }}"}'
+      resources:
+        overrides:
+          namespace:
+            resource: "namespace"
+      name:
+        matches: "^worker_queue_depth$"
+        as: "worker_queue_depth"
+      metricsQuery: 'avg_over_time(worker_queue_depth[1m])'
