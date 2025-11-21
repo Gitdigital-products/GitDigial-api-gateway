@@ -1,0 +1,1 @@
+psql postgresql://user:pass@localhost:5432/gateway -f src/db/migrations/001_init.sql
