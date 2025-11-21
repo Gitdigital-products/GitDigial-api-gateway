@@ -1,0 +1,2 @@
+/helm/blockchain-gateway/templates/prometheus-adapter-configmap.yaml
+/helm/blockchain-gateway/values.promadapter.yaml
