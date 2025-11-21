@@ -1,0 +1,4 @@
+curl -X POST -sS https://api.example.com/tx/submit \
+  -H "x-api-key: YOUR_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"chain":"evm:mainnet","raw_tx":"0xRAW_TX_HEX"}'
