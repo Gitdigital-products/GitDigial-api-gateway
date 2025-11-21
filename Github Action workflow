@@ -1,0 +1,42 @@
+name: CI - LocalStack KMS Integration
+on: [push, pull_request]
+
+jobs:
+  localstack-kms-test:
+    runs-on: ubuntu-latest
+    services:
+      localstack:
+        image: localstack/localstack:1.4
+        ports:
+          - 4566:4566
+        options: >-
+          --health-cmd "awslocal sts get-caller-identity" --health-interval 10s --health-timeout 5s --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install deps
+        run: npm ci
+      - name: Wait for LocalStack
+        run: |
+          echo "Waiting for LocalStack"
+          for i in {1..30}; do
+            awslocal sts get-caller-identity && break || sleep 1
+          done
+      - name: Create KMS key in LocalStack
+        run: bash test/__fixtures__/localstack-setup.sh
+        env:
+          AWS_REGION: us-east-1
+          AWS_ACCESS_KEY_ID: test
+          AWS_SECRET_ACCESS_KEY: test
+          AWS_DEFAULT_REGION: us-east-1
+      - name: Run integration tests
+        env:
+          AWS_REGION: us-east-1
+          AWS_ACCESS_KEY_ID: test
+          AWS_SECRET_ACCESS_KEY: test
+          AWS_DEFAULT_REGION: us-east-1
+          KMS_ENDPOINT: http://localhost:4566
+        run: npm run test -- --testPathPattern=test/integration/kms
