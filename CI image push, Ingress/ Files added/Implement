@@ -1,0 +1,6 @@
+/.github/workflows/ci.yml                # Extended: builds docker image, runs tests, and optionally pushes image
+/.github/workflows/publish-image.yml     # Separate workflow for pushing image on tag creation
+/k8s/ingress-traefik.yaml                # Example Traefik IngressRoute and TLS config (uses cert-manager annotations)
+/k8s/ingress-nginx.yaml                  # Example NGINX Ingress manifest
+/helm/blockchain-gateway/templates/ingress.yaml  # Optional Ingress templated for chart
+/helm/blockchain-gateway/templates/migrate-job.yaml # Example helm hook job for running migrations on install
