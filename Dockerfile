@@ -1,8 +1,5 @@
-FROM node:20-alpine
+FROM python:3.11-slim
 WORKDIR /app
-COPY package*.json ./
-RUN npm ci --production
 COPY . .
-RUN npm run build
-EXPOSE 3000
-CMD ["node", "dist/index.js"]
+RUN pip install -r requirements.txt
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
