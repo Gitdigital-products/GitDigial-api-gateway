@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | AIGateway-Ollama</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #e2e8f0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 900px;
+            width: 100%;
+            text-align: center;
+            padding: 40px;
+            background: rgba(30, 41, 59, 0.8);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+        }
+        
+        .error-code {
+            font-size: 12rem;
+            font-weight: 900;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1;
+            margin-bottom: 10px;
+            text-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
+        }
+        
+        .error-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #f8fafc;
+        }
+        
+        .error-message {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            color: #cbd5e1;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+        
+        .terminal-window {
+            background: #0f172a;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: left;
+            border: 1px solid #334155;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .terminal-dots {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .terminal-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+        }
+        
+        .dot-red { background-color: #f87171; }
+        .dot-yellow { background-color: #fbbf24; }
+        .dot-green { background-color: #10b981; }
+        
+        .terminal-body {
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+        }
+        
+        .terminal-line {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .prompt {
+            color: #10b981;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .command {
+            color: #60a5fa;
+        }
+        
+        .comment {
+            color: #94a3b8;
+            font-style: italic;
+            margin-left: 10px;
+        }
+        
+        .action-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .btn {
+            padding: 14px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            border: none;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(90deg, #3b82f6, #6366f1);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #e2e8f0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(90deg, #2563eb, #4f46e5);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .search-box {
+            margin-top: 30px;
+            width: 100%;
+            max-width: 500px;
+            display: flex;
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: 15px 20px;
+            border-radius: 8px 0 0 8px;
+            border: 1px solid #475569;
+            background: #1e293b;
+            color: #f1f5f9;
+            font-size: 1rem;
+        }
+        
+        .search-btn {
+            padding: 15px 25px;
+            border-radius: 0 8px 8px 0;
+            background: linear-gradient(90deg, #8b5cf6, #d946ef);
+            color: white;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .search-btn:hover {
+            background: linear-gradient(90deg, #7c3aed, #c026d3);
+        }
+        
+        .footer {
+            margin-top: 50px;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+        
+        .footer a {
+            color: #60a5fa;
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .pulsing-dots {
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #3b82f6;
+            margin: 0 4px;
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+        
+        .dot:nth-child(2) {
+            animation-delay: 0.2s;
+            background-color: #8b5cf6;
+        }
+        
+        .dot:nth-child(3) {
+            animation-delay: 0.4s;
+            background-color: #ec4899;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.2; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+        
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 8rem;
+            }
+            
+            .error-title {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 30px 20px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="error-code">404</div>
+        <h1 class="error-title">Gateway Connection Lost</h1>
+        
+        <p class="error-message">
+            The AI gateway you're trying to access cannot be found. This might be due to an outdated link, 
+            a moved resource, or a temporary disconnection from the Ollama network.
+        </p>
+        
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-dots">
+                    <div class="terminal-dot dot-red"></div>
+                    <div class="terminal-dot dot-yellow"></div>
+                    <div class="terminal-dot dot-green"></div>
+                </div>
+            </div>
+            <div class="terminal-body">
+                <div class="terminal-line">
+                    <span class="prompt">user@aigateway:~$</span>
+                    <span class="command">locate https://gitdigital-products.github.io/AIGateway-Ollama/</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="prompt">system@aigateway:~$</span>
+                    <span>ERROR 404: Resource not found in the AI Gateway</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="prompt">system@aigateway:~$</span>
+                    <span>Possible causes:</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="comment"># 1. The page has been moved or renamed</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="comment"># 2. The URL contains a typo</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="comment"># 3. The resource is temporarily unavailable</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="prompt">system@aigateway:~$</span>
+                    <span class="command">suggest_solutions()</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="prompt">system@aigateway:~$</span>
+                    <span>Return to <a href="https://gitdigital-products.github.io/AIGateway-Ollama/" style="color:#60a5fa;">homepage</a> or check the documentation</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="action-buttons">
+            <a href="https://gitdigital-products.github.io/AIGateway-Ollama/" class="btn btn-primary">
+                <i class="fas fa-home"></i> Return to Homepage
+            </a>
+            <a href="https://github.com/gitdigital-products/AIGateway-Ollama" class="btn btn-secondary" target="_blank">
+                <i class="fab fa-github"></i> View on GitHub
+            </a>
+            <button id="reportBtn" class="btn btn-secondary">
+                <i class="fas fa-bug"></i> Report Broken Link
+            </button>
+        </div>
+        
+        <div class="search-box">
+            <input type="text" class="search-input" id="searchInput" placeholder="Search the AIGateway documentation...">
+            <button class="search-btn" id="searchBtn">
+                <i class="fas fa-search"></i> Search
+            </button>
+        </div>
+        
+        <div class="pulsing-dots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+        <p style="margin-top: 10px; font-size: 0.9rem; color: #94a3b8;">
+            AI Gateway is attempting to reconnect...
+        </p>
+    </div>
+    
+    <div class="footer">
+        <p>AIGateway-Ollama &copy; 2023 | <a href="https://github.com/gitdigital-products/AIGateway-Ollama" target="_blank">GitHub Repository</a></p>
+        <p>This page is served from GitHub Pages. If you believe this is an error, please check the URL or contact the maintainers.</p>
+    </div>
+
+    <script>
+        // Search functionality
+        document.getElementById('searchBtn').addEventListener('click', function() {
+            const searchQuery = document.getElementById('searchInput').value;
+            if (searchQuery.trim()) {
+                // Redirect to GitHub search with the query
+                window.open(`https://github.com/gitdigital-products/AIGateway-Ollama/search?q=${encodeURIComponent(searchQuery)}`, '_blank');
+            }
+        });
+        
+        // Allow Enter key to trigger search
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('searchBtn').click();
+            }
+        });
+        
+        // Report broken link functionality
+        document.getElementById('reportBtn').addEventListener('click', function() {
+            const currentUrl = window.location.href;
+            const issueUrl = `https://github.com/gitdigital-products/AIGateway-Ollama/issues/new?title=404%20Error%20on%20${encodeURIComponent(currentUrl)}&body=I%20encountered%20a%20404%20error%20on%20the%20page:%20${encodeURIComponent(currentUrl)}`;
+            window.open(issueUrl, '_blank');
+        });
+        
+        // Animate the terminal text
+        document.addEventListener('DOMContentLoaded', function() {
+            const terminalLines = document.querySelectorAll('.terminal-line');
+            terminalLines.forEach((line, index) => {
+                line.style.opacity = '0';
+                line.style.transform = 'translateY(10px)';
+                
+                setTimeout(() => {
+                    line.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    line.style.opacity = '1';
+                    line.style.transform = 'translateY(0)';
+                }, 300 + (index * 200));
+            });
+        });
+        
+        // Create a simple typing effect for the search placeholder
+        const placeholderTexts = [
+            "Search the AIGateway documentation...",
+            "Type your query here...",
+            "Looking for something specific?"
+        ];
+        let currentIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typingSpeed = 100;
+        
+        function typePlaceholder() {
+            const searchInput = document.getElementById('searchInput');
+            const currentText = placeholderTexts[currentIndex];
+            
+            if (isDeleting) {
+                searchInput.placeholder = currentText.substring(0, charIndex - 1);
+                charIndex--;
+                typingSpeed = 50;
+            } else {
+                searchInput.placeholder = currentText.substring(0, charIndex + 1);
+                charIndex++;
+                typingSpeed = 100;
+            }
+            
+            if (!isDeleting && charIndex === currentText.length) {
+                isDeleting = true;
+                typingSpeed = 1000; // Pause at the end
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                currentIndex = (currentIndex + 1) % placeholderTexts.length;
+                typingSpeed = 500; // Pause before typing next
+            }
+            
+            setTimeout(typePlaceholder, typingSpeed);
+        }
+        
+        // Start the typing effect after a delay
+        setTimeout(typePlaceholder, 1000);
+    </script>
+</body>
+</html>
